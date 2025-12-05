@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary:   #1b2a4a;
+  --accent:    #c9a84c;
+  --accent-light: #f0d98a;
+  --bg:        #f4f6f9;
+  --card-bg:   #ffffff;
+  --text:      #1a1a2e;
+  --muted:     #6c757d;
+  --radius:    14px;
+  --shadow:    0 4px 20px rgba(0,0,0,0.08);
+  --transition: 0.25s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* ── Navbar ── */
+.navbar-bookmyroom {
+  background-color: var(--primary) !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  padding: 0.75rem 0;
+}
+
+.navbar-brand-custom {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #ffffff !important;
+  letter-spacing: 0.5px;
+}
+
+.navbar-brand-custom span {
+  color: var(--accent);
+}
+
+.navbar-bookmyroom .nav-link {
+  color: rgba(255,255,255,0.85) !important;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.navbar-bookmyroom .nav-link:hover {
+  color: var(--accent) !important;
+}
+
+/* ── Hero ── */
+.hero-section {
+  background: linear-gradient(135deg, var(--primary) 0%, #2e4472 100%);
+  color: #fff;
+  padding: 64px 0 56px;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.hero-section h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.hero-section h1 span {
+  color: var(--accent);
+}
+
+.hero-section p {
+  font-size: 1.125rem;
+  color: rgba(255,255,255,0.78);
+  max-width: 520px;
+  margin: 0 auto 1.75rem;
+}
+
+.hero-search-bar {
+  max-width: 460px;
+  margin: 0 auto;
+  display: flex;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+
+.hero-search-bar input {
+  flex: 1;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+.hero-search-bar button {
+  background-color: var(--accent);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.hero-search-bar button:hover {
+  background-color: var(--accent-light);
+}
+
+/* ── Section Heading ── */
+.section-heading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primary);
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 48px;
+  height: 3px;
+  background-color: var(--accent);
+  border-radius: 2px;
+}
+
+/* ── Room Card ── */
+.card-room {
+  border: none;
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.card-room:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.13);
+}
+
+.card-room img {
+  height: 210px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 0;
+}
+
+.card-room .card-body {
+  padding: 1.1rem 1.2rem 1.3rem;
+}
+
+.card-room .card-title a {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.card-room .card-title a:hover {
+  color: var(--accent);
+}
+
+.card-room .price-tag {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0.4rem 0 0.6rem;
+}
+
+.btn-view {
+  background-color: var(--primary);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  transition: background var(--transition);
+}
+
+.btn-view:hover {
+  background-color: #2e4472;
+  color: #fff;
+}
+
+/* ── Avatar ── */
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 2px solid var(--accent);
+  object-fit: cover;
+}
+
+.dropdown-avatar .dropdown-toggle::after {
+  position: absolute;
+  right: -11px;
+  top: 50%;
+}
+
+/* ── Carousel ── */
+.carousel-room img {
+  height: 60vh;
+  object-fit: cover;
+}
+
+/* ── List group ── */
+.list-group-item {
+  background-color: transparent;
+  color: var(--text);
+  font-size: 1.05rem;
+  border: none;
+  border-bottom: 1px solid #eee;
+  padding: 0.75rem 0;
+}
+
+.list-group-item:hover {
+  color: inherit;
+}
+
+/* ── Rating ── */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 0.5rem;
+}
+
+.field-rating button {
+  background-color: transparent !important;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.field-rating .on  { color: var(--accent); }
+.field-rating .off { color: #ccc; }
+
+/* ── Search form ── */
+.search-panel {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.search-panel .form-label {
+  font-weight: 500;
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+.search-panel .form-control,
+.search-panel .form-select {
+  border-radius: 8px;
+  border: 1.5px solid #e0e0e0;
+  transition: border-color var(--transition);
+}
+
+.search-panel .form-control:focus,
+.search-panel .form-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(27,42,74,0.08);
+}
+
+/* ── Misc ── */
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
