@@ -112,15 +112,15 @@ const RoomDetailsScreen = () => {
                     <Rating reviews={room.ratings} />
                     <div className="carousel-room mt-3 mb-3">
                         <Carousel>
-                            {room.images?.map((img: any) => { const apiUrl = process.env.REACT_APP_API_URL || ''; const src = img.image?.startsWith('/uploads') ? `${apiUrl}${img.image}` : img.image; return (
+                            {room.images?.map((img: any) => (
                                 <Carousel.Item key={img._id}>
                                     <img
                                         className="d-block w-100"
-                                        src={src}
+                                        src={img.image}
                                         alt={img._id}
                                     />
                                 </Carousel.Item>
-                            )})
+                            ))}
                         </Carousel>
                     </div>
                     <Row>
