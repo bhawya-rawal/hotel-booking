@@ -23,24 +23,14 @@ app.use(express.json());
 
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
-// Default 
 app.get("/api", (req: Request, res: Response)  => {
     res.status(201).json({ message: "Welcome to Hotel Booking App" });
 })
 
-// Room Route
 app.use("/api/rooms", roomRoutes);
-
-// User Route
 app.use("/api/users", userRoutes);
-
-// Booking Route
 app.use("/api/bookings", bookingRoutes);
-
-// Upload Route
 app.use("/api/uploads", uploadRoutes);
-
-// Razorpay Route
 app.use("/api/payment/razorpay", razorpayRoutes);
 
 app.use(errorHandler);
