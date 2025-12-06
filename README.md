@@ -1,4 +1,4 @@
-# HotelBooking
+# BookMyRoom
 
 Hotel Booking App Using The MERN Stack With TypeScript & Redux 🤩
 
@@ -13,6 +13,7 @@ Hotel Booking App Using The MERN Stack With TypeScript & Redux 🤩
 - Admin Room management
 - Admin User management
 - Admin Booking management
+- Razorpay payment integration
 
 ## Technology Stack:
 
@@ -24,20 +25,21 @@ Hotel Booking App Using The MERN Stack With TypeScript & Redux 🤩
 - React
 - React Bootstrap
 - Redux
-- React Paypal Button V2
+- Razorpay
 
 ## Usage
 
 ### Env Variables
 
-Create a .env file in then root and add the following
+Create a .env file in the root and add the following
 
 ```
 NODE_ENV = development
 PORT = 5000
 MONGO_URI = your mongodb uri
 JWT_SECRET = 'abc123'
-PAYPAL_CLIENT_ID = your paypal client id
+RAZORPAY_KEY_ID = your razorpay key id
+RAZORPAY_KEY_SECRET = your razorpay key secret
 ```
 
 ## Install Dependencies
