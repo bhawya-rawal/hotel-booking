@@ -116,7 +116,7 @@ const RoomDetailsScreen = () => {
                                 <Carousel.Item key={img._id}>
                                     <img
                                         className="d-block w-100"
-                                        src={img.image}
+                                        src={`${process.env.REACT_APP_API_URL || ''}${img.image}`}
                                         alt={img._id}
                                     />
                                 </Carousel.Item>
