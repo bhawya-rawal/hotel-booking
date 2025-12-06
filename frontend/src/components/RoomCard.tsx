@@ -10,10 +10,12 @@ type IRoomCard = Pick<IRoom, '_id' | 'images' | 'name' | 'pricePerNight' | 'rati
 const RoomCard: React.FC<IRoomCard> = (props: IRoomCard) => {
 
   const { _id, images, name, pricePerNight, ratings } = props;
+  const apiUrl = process.env.REACT_APP_API_URL || '';
+  const imgSrc = images[0]?.image?.startsWith('/uploads') ? `${apiUrl}${images[0].image}` : images[0]?.image;
 
   return (
     <Card className="card-room">
-        <Card.Img variant="top" src={images[0].image} />
+        <Card.Img variant="top" src={imgSrc} />
         <Card.Body>
             <Card.Title as="h5">
               <Link to={`/room/${_id}`}>{name}</Link>
