@@ -11,11 +11,11 @@ import roomRoutes from './routes/roomRoutes';
 import userRoutes from './routes/userRoutes';
 import bookingRoutes from './routes/bookingRoutes';
 import uploadRoutes from './routes/uploadRoutes';
+import razorpayRoutes from './routes/razorpayRoutes';
 
 const app: Application = express();
 
 dotenv.config();
-
 connectDB();
 
 app.use(cors());
@@ -40,9 +40,8 @@ app.use("/api/bookings", bookingRoutes);
 // Upload Route
 app.use("/api/uploads", uploadRoutes);
 
-app.get("/api/config/paypal", (req, res) => {
-  res.status(201).send(process.env.PAYPAL_CLIENT_ID);
-});
+// Razorpay Route
+app.use("/api/payment/razorpay", razorpayRoutes);
 
 app.use(errorHandler);
 app.use(notFound);

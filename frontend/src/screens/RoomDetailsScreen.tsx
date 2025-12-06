@@ -16,21 +16,12 @@ import RoomFeatures from '../components/RoomFeatures';
 import { useAuthStatus } from '../hooks/useAuthStatus';
 import { Link } from 'react-router-dom';
 import { CHECK_ROOM_BOOKING_RESET, CREATE_BOOKING_RESET } from '../redux/constants/BookingConstants';
-import axios from 'axios';
-import { PayPalButton } from "react-paypal-button-v2";
 import { createBooking } from '../redux/actions/BookingActions';
 import { getBookedDates } from '../redux/actions/BookingActions';
 import { IBooking } from '../interfaces/IBooking';
 
-
 type TId = {
     id: IRoom['_id']
-}
-
-declare global {
-    interface Window {
-        paypal:any;
-    }
 }
 
 const RoomDetailsScreen = () => {
@@ -40,8 +31,6 @@ const RoomDetailsScreen = () => {
     const [checkInDate, setCheckInDate] = useState<IBooking['checkInDate']>();
     const [checkOutDate, setCheckOutDate] = useState<IBooking['checkOutDate']>();
     const [daysOfStay, setDaysOfStay] = useState<IBooking['daysOfStay']>(0);
-
-    const [sdkReady, setSdkReady] = useState<Boolean>(false);
 
     const { id } = useParams<TId>();
 
@@ -61,25 +50,6 @@ const RoomDetailsScreen = () => {
     const {bookedDates} = useSelector((state: RootStateOrAny) => state.bookedDates);
 
     useEffect(() => {
-
-        const addPaypalScript = async () => {
-            const { data: clientId } = await axios.get("/api/config/paypal");
-            const script = document.createElement("script");
-            script.type = "text/javascript";
-            script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-            script.async = true;
-            script.onload = () => {
-                setSdkReady(true);
-            };
-            document.body.appendChild(script);
-        };
-
-        if (!window.paypal && !successBookingCreate) {
-            addPaypalScript();
-        } else {
-            setSdkReady(true);
-        }
-
         dispatch(getRoomDetails(id as string));
         dispatch(getBookedDates(id as string));
         dispatch({ type: CHECK_ROOM_BOOKING_RESET });
@@ -110,32 +80,27 @@ const RoomDetailsScreen = () => {
         excludedDates.push(new Date(date))
     })
 
-    const successPaymentHandler = (paymentResult: any) => {
-            
+    const handleConfirmBooking = () => {
         const amountPaid = Number(room.pricePerNight) * Number(daysOfStay);
-
         const paymentInfo = {
-            id: paymentResult.id,
-            status: paymentResult.status,
-            update_time: paymentResult.update_time,
-            email_address: paymentResult.payer.email_address,
-        }
-
+            id: `BMR-${Date.now()}`,
+            status: 'CONFIRMED',
+            update_time: new Date().toISOString(),
+            email_address: '',
+        };
         const bookingData = {
             room: id,
-            checkInDate, 
-            checkOutDate, 
-            amountPaid, 
+            checkInDate,
+            checkOutDate,
+            amountPaid,
             paymentInfo,
             daysOfStay,
-        }
-
+        };
         dispatch(createBooking(bookingData));
         dispatch(getBookedDates(id as string));
         dispatch({ type: CHECK_ROOM_BOOKING_RESET });
         dispatch({ type: CREATE_BOOKING_RESET });
-
-    }
+    };
 
   return (
       <Container className="pb-4">
@@ -181,11 +146,14 @@ const RoomDetailsScreen = () => {
 
                         </Col>
                         <Col xs={12} sm={12} md={4}>
-                            <Card className="shadow p-3 mb-5 bg-body rounded">
-                                <Card.Body>
-                                    <Card.Title>${room.pricePerNight} / Per Night</Card.Title>
-                                    <hr />
-                                    <p className="mb-3">Pick Check In & Check Out Date</p>
+                            <div className="booking-card">
+                                <div className="booking-card-header">
+                                    <span className="booking-price">₹{room.pricePerNight}</span>
+                                    <span className="booking-per-night"> / night</span>
+                                </div>
+                                <hr className="booking-divider" />
+                                <p className="booking-date-label">Select Check-in &amp; Check-out</p>
+                                <div className="booking-datepicker-wrap">
                                     <DatePicker
                                         dateFormat="DD-MM-YYYY"
                                         className='w-100'
@@ -198,45 +166,51 @@ const RoomDetailsScreen = () => {
                                         selectsRange
                                         inline
                                     />
-                                    {loadingRoomIsAvailable && <Loader />}
-                                    {successRoomIsAvailable && <Message variant="success">Room Is Available</Message>}                               
-                                    {errorRoomIsAvailable && <Message variant="danger">{errorRoomIsAvailable}</Message>}
+                                </div>
 
-                                    {loggedIn && successRoomIsAvailable && ( 
-                                        <Button size="lg" variant="primary" className="mb-3">
-                                            Pay ${Number(room.pricePerNight) * Number(daysOfStay)}
-                                        </Button>
-                                     )}
+                                {loadingRoomIsAvailable && <Loader />}
 
-                                     {!sdkReady && <Loader />}
+                                {successRoomIsAvailable && daysOfStay > 0 && (
+                                    <div className="booking-summary">
+                                        <div className="booking-summary-row">
+                                            <span>₹{room.pricePerNight} × {daysOfStay} night{Number(daysOfStay) > 1 ? 's' : ''}</span>
+                                            <span>₹{Number(room.pricePerNight) * Number(daysOfStay)}</span>
+                                        </div>
+                                        <div className="booking-summary-row booking-summary-total">
+                                            <span>Total</span>
+                                            <span>₹{Number(room.pricePerNight) * Number(daysOfStay)}</span>
+                                        </div>
+                                    </div>
+                                )}
 
-                                     {loggedIn && successRoomIsAvailable && sdkReady && !successBookingCreate && (
-                                        <PayPalButton
-                                            amount={Number(room.pricePerNight) * Number(daysOfStay)}
-                                            onSuccess={successPaymentHandler}
-                                        />
-                                     )}
+                                {errorRoomIsAvailable && <Message variant="danger">{errorRoomIsAvailable}</Message>}
 
-                                     {!loggedIn && !successRoomIsAvailable && (
-                                        <Message variant="info">
-                                            Please <Link to="/login">Sign In</Link> for booking
-                                        </Message>
-                                     )}
-                                
-                                     {successBookingCreate && (
-                                        <Message variant="success">
-                                            Your booking has been paymented
-                                        </Message>
-                                     )}
+                                {loggedIn && successRoomIsAvailable && !successBookingCreate && (
+                                    <Button
+                                        className="booking-confirm-btn"
+                                        onClick={handleConfirmBooking}
+                                        disabled={loadingBookingCreate}
+                                    >
+                                        {loadingBookingCreate ? <Loader /> : 'Confirm Booking'}
+                                    </Button>
+                                )}
 
-                                     {errorBookingCreate && (
-                                        <Message variant="success">
-                                            {errorBookingCreate}
-                                        </Message>
-                                     )}
+                                {!loggedIn && (
+                                    <div className="booking-login-msg">
+                                        <Link to="/login">Sign in</Link> to book this room
+                                    </div>
+                                )}
 
-                                </Card.Body>
-                            </Card>
+                                {successBookingCreate && (
+                                    <Message variant="success">
+                                        🎉 Booking confirmed! Check <Link to="/bookings/me">My Bookings</Link>.
+                                    </Message>
+                                )}
+
+                                {errorBookingCreate && (
+                                    <Message variant="danger">{errorBookingCreate}</Message>
+                                )}
+                            </div>
                         </Col>
                     </Row>
                 </Col>

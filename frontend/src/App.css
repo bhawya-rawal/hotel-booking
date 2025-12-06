@@ -277,6 +277,151 @@ body {
   box-shadow: 0 0 0 3px rgba(27,42,74,0.08);
 }
 
+/* ── Booking Card ── */
+.booking-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 1.5rem;
+  position: sticky;
+  top: 88px;
+}
+
+.booking-card-header {
+  margin-bottom: 0.25rem;
+}
+
+.booking-price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.booking-per-night {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.booking-divider {
+  border-color: #eee;
+  margin: 0.85rem 0;
+}
+
+.booking-date-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.6rem;
+}
+
+.booking-datepicker-wrap .react-datepicker {
+  width: 100%;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+}
+
+.booking-datepicker-wrap .react-datepicker__header {
+  background-color: var(--primary);
+  border-radius: 8px 8px 0 0;
+  padding: 0.6rem 0;
+}
+
+.booking-datepicker-wrap .react-datepicker__current-month,
+.booking-datepicker-wrap .react-datepicker__day-name {
+  color: #fff;
+}
+
+.booking-datepicker-wrap .react-datepicker__day--selected,
+.booking-datepicker-wrap .react-datepicker__day--in-range,
+.booking-datepicker-wrap .react-datepicker__day--range-start,
+.booking-datepicker-wrap .react-datepicker__day--range-end {
+  background-color: var(--primary) !important;
+  color: #fff !important;
+  border-radius: 50%;
+}
+
+.booking-datepicker-wrap .react-datepicker__day--in-selecting-range {
+  background-color: rgba(27,42,74,0.15) !important;
+  color: var(--primary) !important;
+}
+
+.booking-datepicker-wrap .react-datepicker__day:hover {
+  border-radius: 50%;
+  background-color: rgba(27,42,74,0.12);
+}
+
+.booking-summary {
+  background: #f8f9fb;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin: 1rem 0 0.75rem;
+}
+
+.booking-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.93rem;
+  color: var(--text);
+  padding: 0.2rem 0;
+}
+
+.booking-summary-total {
+  font-weight: 700;
+  font-size: 1rem;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 0.4rem;
+  padding-top: 0.5rem;
+  color: var(--primary);
+}
+
+.booking-confirm-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-top: 0.5rem;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.booking-confirm-btn:hover {
+  background-color: #2e4472;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.booking-confirm-btn:disabled {
+  opacity: 0.7;
+}
+
+.booking-login-msg {
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #f0f4ff;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.booking-login-msg a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.booking-login-msg a:hover {
+  text-decoration: underline;
+}
+
 /* ── Misc ── */
 .page-title {
   font-size: 1.6rem;

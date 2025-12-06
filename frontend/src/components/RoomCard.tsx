@@ -18,7 +18,7 @@ const RoomCard: React.FC<IRoomCard> = (props: IRoomCard) => {
             <Card.Title as="h5">
               <Link to={`/room/${_id}`}>{name}</Link>
             </Card.Title>
-            <div className="price-tag">${pricePerNight} <small style={{fontWeight:400,fontSize:'0.82rem',color:'#888'}}>/night</small></div>
+            <div className="price-tag">₹{pricePerNight} <small style={{fontWeight:400,fontSize:'0.82rem',color:'#888'}}>/night</small></div>
             <Rating reviews={ratings} />
             <LinkContainer to={`/room/${_id}`}>
               <Button className="btn-view">View Details</Button>

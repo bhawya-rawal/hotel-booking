@@ -260,8 +260,7 @@ const AdminCreateRoomScreen = () => {
                             value={Number(price)}
                             onChange={(e) => setPrice(Number(e.target.value))}
                             placeholder="Price Per Night"
-                            min="10" 
-                            max="100"
+                            min="1" 
                         />
                     </FormGroup>
                     <FormGroup className="mb-3" controlId="images">
