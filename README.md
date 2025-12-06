@@ -2,7 +2,7 @@
 
 Hotel Booking App Using The MERN Stack With TypeScript & Redux 🤩
 
-![screenshot](https://i.ibb.co/5Fprvgc/roomhotel.png)
+![screenshot](https://raw.githubusercontent.com/bhawya-rawal/hotel-booking/main/uploads/image.png)
 
 ## Features:
 
